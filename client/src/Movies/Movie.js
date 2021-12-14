@@ -5,9 +5,12 @@ import { useParams, useRouteMatch } from 'react-router';
 export default function Movie(props) {
   const [movie, setMovie] = useState();
 
+  const { items } = props;
+  
   const { id } = useParams();
-  const { url } = useRouteMatch();
-  console.log(url);
+  console.log(id);
+
+
   // Change ^^^ that line and use a hook to obtain the :id parameter from the URL
 
   useEffect(() => {
@@ -15,7 +18,7 @@ export default function Movie(props) {
       .get(`http://localhost:5000/api/movies/${id}`) // Study this endpoint with Postman
       .then(response => {
         console.log(response);
-        
+        setMovie(response.data);
         // Study this response with a breakpoint or log statements
         // and set the response data as the 'movie' slice of state
       })
